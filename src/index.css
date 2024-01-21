@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+
+.choices {
+  @apply py-2 px-2 rounded-xl border border-gray-500 font-light;
+}
+
+@tailwind utilities;
+
+body {
+  height: 100vh;
+  background: linear-gradient(0deg, #150080 0.03%, #d08642);
+  display: grid;
+  place-items: center;
+  font-size: 17px;
+  color: #2d264b;
+}
+
+.btn {
+  background: linear-gradient(0deg, #150080 0.03%, #d08642);
+  padding: 5px 30px;
+  border-radius: 10px;
+  font-size: 18px;
+  color: white;
+}
