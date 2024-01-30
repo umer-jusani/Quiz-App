@@ -3,15 +3,16 @@ import InitialState from "./constant";
 import Result from "./Result";
 
 const Quiz = ({ data }) => {
-  const [currentData, SetcurrentData] = useState(1);
+  const [currentData, SetcurrentData] = useState(0);
   const [answerIdx, setAnswerIdx] = useState(null);
   const [answer, setAnswer] = useState(null);
   const [result, setResult] = useState(InitialState);
   const [showResult, setshowResult] = useState(false);
+  const [inputVal, SetinputVal] = useState("");
 
   const gameStart = () => {
     setshowResult(false);
-    SetcurrentData(1);
+    SetcurrentData(0);
     setResult({
       score: 0,
       CorrectAnswer: 0,
@@ -54,6 +55,25 @@ const Quiz = ({ data }) => {
     }
   };
 
+  const handleInput = (e) => {
+    const value = e.target.value;
+    SetinputVal(value);
+    console.log(value);
+
+    if (value) {
+      setAnswerIdx(true);
+    } else {
+      setAnswerIdx(null);
+    }
+
+    if (value == data[currentData].correctAnswer) {
+      setAnswer(true);
+      console.log("Answer is correct");
+    } else {
+      setAnswer(false);
+    }
+  };
+
   if (data) {
     const { id, question, choices } = data[currentData];
 
@@ -69,7 +89,7 @@ const Quiz = ({ data }) => {
               <h3 className="font-medium text-xl">{question}</h3>
             </div>
             <ul className="space-y-3">
-              {choices &&
+              {choices ? (
                 choices.map((answer, index) => {
                   return (
                     <li
@@ -84,7 +104,15 @@ const Quiz = ({ data }) => {
                       {answer}
                     </li>
                   );
-                })}
+                })
+              ) : (
+                <input
+                  type="text"
+                  className="w-1/3 px-4 py-2 border-2 border-[#2d264b]"
+                  placeholder="Enter the Correct Answer"
+                  onChange={(e) => handleInput(e)}
+                />
+              )}
             </ul>
             <div className="flex justify-end">
               <button
