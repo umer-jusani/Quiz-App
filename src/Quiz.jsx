@@ -9,6 +9,16 @@ const Quiz = ({ data }) => {
   const [result, setResult] = useState(InitialState);
   const [showResult, setshowResult] = useState(false);
 
+  const gameStart = () => {
+    setshowResult(false);
+    SetcurrentData(1);
+    setResult({
+      score: 0,
+      CorrectAnswer: 0,
+      wrongAnswer: 0,
+    });
+  };
+
   const onAnswerClick = (answer, index) => {
     setAnswerIdx(index);
 
@@ -40,6 +50,7 @@ const Quiz = ({ data }) => {
       SetcurrentData(0);
     } else {
       SetcurrentData(currentData + 1);
+      setshowResult(false);
     }
   };
 
